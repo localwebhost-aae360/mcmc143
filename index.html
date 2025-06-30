@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CRUSH</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      height: 100vh;
+      background: linear-gradient(to bottom right, #fff7ed, #ffe4e6);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .move-away {
+      transition: all 0.3s ease-in-out;
+      position: relative;
+    }
+
+    #videoModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+    }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="text-4xl font-extrabold text-pink-600 mb-2">CRUSH MO BAKO HUUHHH BOYYY!!!???</h1>
+ <div class="w-[400px]">
+  <img src="angry.webp" alt="Your image" class="w-full h-auto rounded-lg shadow mb-6">
+</div>
+
+
+  <!-- Buttons -->
+  <div class="flex space-x-4 justify-center">
+    <button id="yesBtn" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full text-lg shadow transition">
+      Yes
+    </button>
+    <button id="noBtn" class="move-away bg-red-500 text-white px-6 py-2 rounded-full text-lg shadow">
+      No
+    </button>
+    <button id="maybeBtn" class="move-away bg-yellow-400 text-white px-6 py-2 rounded-full text-lg shadow">
+      Maybe
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div id="videoModal" class="fixed hidden items-center justify-center">
+    <div class="card text-center w-full max-w-[1000px] px-6">
+      <div class="text-xl font-bold text-pink-600 mb-2">ALAM KO NAMAAANNN!!!</div>
+      <video id="reactionVideo" controls class="w-full max-w-[300px] rounded-lg shadow-lg mx-auto">
+        <source src="tagumpay.mp4" type="video/mp4">
+        Your browser does not support the video tag or the file could not be loaded.
+      </video>
+      <button onclick="closeModal()" class="mt-4 px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-900">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const maybeBtn = document.getElementById('maybeBtn');
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('reactionVideo');
+
+    function moveButton(btn) {
+      const randX = Math.floor(Math.random() * 300) - 150;
+      const randY = Math.floor(Math.random() * 150) - 75;
+      btn.style.transform = `translate(${randX}px, ${randY}px)`;
+    }
+
+    noBtn.addEventListener('mouseenter', () => moveButton(noBtn));
+    maybeBtn.addEventListener('mouseenter', () => moveButton(maybeBtn));
+
+    yesBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      video.currentTime = 0;
+      video.play();
+    });
+
+    function closeModal() {
+      modal.style.display = 'none';
+      video.pause();
+      video.currentTime = 0;
+    }
+  </script>
+
+</body>
+</html>
